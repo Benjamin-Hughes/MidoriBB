@@ -1,5 +1,6 @@
 var express = require('express');
 var User = require('./models/user');
+var Discussion = require('./models/discussion');
 
 var router = express.router();
 
@@ -11,5 +12,9 @@ router.use(function(req, res, next) {
 });
 
 router.get("/", function(req, res, next) {
-  res.render("index");
+  Discussion.find()
+  .exec(function(err, discussions) {
+    if (err) { return next(err); }
+    res.render('index', { discussions: discussions });
+  });
 });
