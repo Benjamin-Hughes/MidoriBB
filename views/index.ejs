@@ -1,1 +1,17 @@
+<% include _header %>
+<h1>MidoriBB</h1>
 
+<% discussions.forEach(function(discussion) { %>
+  <div class="panel panel-default discussion">
+    <div class="panel-heading">
+      <a href="/discussions/<% discussion.title %>">
+        <% discussion.title() %>
+      </a>
+    </div>
+    <div class="panel-body discussion-description">
+      <% discussion.description() %>
+    </div>
+  </div>
+<% }) %>
+
+<% include _footer %>
