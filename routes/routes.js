@@ -1,8 +1,8 @@
 var express = require('express');
-var User = require('./models/user');
-var Discussion = require('./models/discussion');
+var User = require('../models/user');
+var Discussion = require('../models/discussion');
 
-var router = express.router();
+var router = express.Router();
 
 router.use(function(req, res, next) {
   res.locals.currentUser = req.user;

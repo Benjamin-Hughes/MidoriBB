@@ -5,7 +5,7 @@ var postSchema = mongoose.Schema({
   title: { type: String, required: true },
   link: { type: String, required: true },
   text: { type: String, required: true },
-  creator: { type: Schema.Types.ObjectId, ref: "User" }
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
 });
 
 var Post = mongoose.model("Post", postSchema);
