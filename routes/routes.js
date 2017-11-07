@@ -18,3 +18,5 @@ router.get("/", function(req, res, next) {
     res.render('index', { discussions: discussions });
   });
 });
+
+module.exports = router;
