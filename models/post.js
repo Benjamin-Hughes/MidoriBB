@@ -1,12 +1,12 @@
 var mongoose = require('mongoose');
 var bcrypt = require ('bcrypt-nodejs');
 
-var discussionSchema = mongoose.Schema({
+var postSchema = mongoose.Schema({
   title: { type: String, required: true },
-  moderators: [{ type: Schema.Types.ObjectId, ref: "User" }],
-  posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
-  description: { type: String, required: true }
+  link: { type: String, required: true },
+  text: { type: String, required: true },
+  creator: { type: Schema.Types.ObjectId, ref: "User" }
 });
 
-var Discussion = mongoose.model('Discussion', discussionSchema);
-module.exports = Discussion;
+var Post = mongoose.model("Post", postSchema);
+module.exports = Post;
