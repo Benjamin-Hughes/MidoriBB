@@ -19,4 +19,9 @@ router.get("/", function(req, res, next) {
   });
 });
 
+router.get("/discussion/add", function(req, res, next) {
+  res.render('create');
+});
+
+
 module.exports = router;
