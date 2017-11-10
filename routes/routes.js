@@ -14,11 +14,6 @@ router.use(function(req, res, next) {
 });
 
 router.get("/", function(req, res, next) {
-  // Discussion.find()
-  // .exec(function(err, discussions) {
-  //   if (err) { return next(err); }
-  //   res.render('index', { discussions: discussions });
-  // });
   Discussion.find({}, function(err, discussions) {
     if (err) { return next(err); }
     res.render('index', { discussions: discussions })

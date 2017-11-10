@@ -8,6 +8,5 @@ var discussionSchema = mongoose.Schema({
   description: { type: String, required: true }
 });
 
-
 var Discussion = mongoose.model("Discussion", discussionSchema);
 module.exports = Discussion;
