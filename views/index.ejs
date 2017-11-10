@@ -2,18 +2,18 @@
 <h1>MidoriBB</h1>
 
 <div class="panel panel-default">
-  <a href="/discussions/add">Add a discussion</a>
+  <a href="/discussion/add">Add a discussion</a>
 </div>
 
 <% discussions.forEach(function(discussion) { %>
   <div class="panel panel-default discussion">
     <div class="panel-heading">
       <a href="/discussions/<% discussion.title %>">
-        <% discussion.title() %>
+        <%= discussion.title %>
       </a>
     </div>
     <div class="panel-body discussion-description">
-      <% discussion.description() %>
+      <%= discussion.description %>
     </div>
   </div>
 <% }) %>
