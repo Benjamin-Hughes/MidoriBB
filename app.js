@@ -6,11 +6,15 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var flash = require('connect-flash');
 
+var passport = require('passport');
+
 var routes = require('./routes/routes');
+var setUpPassport = require('./setUpPassport');
 
 var app = express();
 
 mongoose.connect("mongodb://localhost:27017/test");
+setUpPassport();
 
 var User = mongoose.model('User');
 var Discussion = mongoose.model('Discussion');
@@ -30,6 +34,9 @@ app.use(session({
 }));
 
 app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(routes);
 
