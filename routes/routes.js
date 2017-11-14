@@ -44,6 +44,12 @@ router.get("/login", function(req, res, next) {
   res.render("login");
 });
 
+router.post("/login", passport.authenticate("login", {
+  successRedirect: "/",
+  failureRedirect: "/login",
+  failureFlash: true
+}));
+
 router.get("/signup", function(req, res, next) {
   res.render("signup");
 });
