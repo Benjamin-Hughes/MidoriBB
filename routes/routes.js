@@ -50,6 +50,11 @@ router.post("/login", passport.authenticate("login", {
   failureFlash: true
 }));
 
+router.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
+})
+
 router.get("/signup", function(req, res, next) {
   res.render("signup");
 });
