@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express = require('express');
 var mongoose = require('mongoose');
 var path = require('path');
@@ -28,7 +29,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
-  secret: "bXedCj3acLjD7£(&@lJAIWe+++Djl^^dl!@!==))",
+  secret: process.env.MYSECRET,
   resave: true,
   saveUninitialized: true
 }));
