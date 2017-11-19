@@ -21,6 +21,7 @@ router.get("/", function(req, res, next) {
   });
 });
 
+
 router.get("/discussion/add", function(req, res, next) {
   res.render("create");
 });
@@ -38,6 +39,41 @@ router.post("/discussion/add", function(req, res, next) {
   discussion.save(function(err) {
     if (err) { return handleError(err); }
     res.redirect("/");
+  });
+});
+
+router.get("/discussion/:discussion_id/index", function (req, res, next) {
+  Post.find({ parent: req.params.discussion_id }, function(err, posts) {
+    if (err) { return next(err); }
+    res.render("discussion-index", {
+      discussionId: req.params.discussion_id,
+      posts: posts
+    });
+  });
+});
+
+router.get("/discussion/:discussion_id/create_post", function(req, res, next) {
+  res.render("create-post", { discussionId: req.params.discussion_id });
+});
+
+router.post("/discussion/:discussion_id/create_post", function(req, res, next) {
+  newPost = new Post({
+    _id: new mongoose.Types.ObjectId,
+    title: req.body.title,
+    text: req.body.content,
+    creator: req.user.username,
+    parent: req.params.discussion_id
+  });
+  newPost.save(function(err) {
+    if (err) { return handleError(err); }
+    res.redirect('/discussion/' + req.params.discussion_id + '/index');
+  });
+});
+
+router.get("/discussion/:discussion_id/:post_id", function(req, res, next) {
+  Post.findOne({_id: req.params.post_id }, function(err, post) {
+    if (err) { return next(err); }
+    res.render("post", { post: post });
   });
 });
 

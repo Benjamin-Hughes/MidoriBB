@@ -8,7 +8,7 @@
 <% discussions.forEach(function(discussion) { %>
   <div class="panel panel-default discussion">
     <div class="panel-heading">
-      <a href="/discussions/<% discussion.title %>">
+      <a href="/discussion/<%= discussion._id %>/index">
         <%= discussion.title %>
       </a>
     </div>
