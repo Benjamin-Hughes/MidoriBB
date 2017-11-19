@@ -14,6 +14,15 @@ router.use(function(req, res, next) {
   next();
 });
 
+function checkAuth(req, res, next) {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    req.flash("info", "Please log in to continue");
+    res.redirect("/login");
+  }
+}
+
 router.get("/", function(req, res, next) {
   Discussion.find({}, function(err, discussions) {
     if (err) { return next(err); }
@@ -52,11 +61,11 @@ router.get("/discussion/:discussion_id/index", function (req, res, next) {
   });
 });
 
-router.get("/discussion/:discussion_id/create_post", function(req, res, next) {
+router.get("/discussion/:discussion_id/create_post", checkAuth, function(req, res, next) {
   res.render("create-post", { discussionId: req.params.discussion_id });
 });
 
-router.post("/discussion/:discussion_id/create_post", function(req, res, next) {
+router.post("/discussion/:discussion_id/create_post", checkAuth, function(req, res, next) {
   newPost = new Post({
     _id: new mongoose.Types.ObjectId,
     title: req.body.title,
