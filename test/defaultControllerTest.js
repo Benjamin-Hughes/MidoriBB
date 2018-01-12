@@ -3,19 +3,24 @@ const chai = require("chai");
 const expect = chai.expect;
 const chaiHttp = require("chai-http");
 const models = require("../models");
+let exec = require('child_process').exec;
 
 chai.use(chaiHttp);
 
 describe("Default Controller", function() {
-    
-    before(function() {
-        models.Topic.findOrCreate({ where: { title: 'Introduce yourself', description: 'New here? Come say hi' }})
-        .spread((topic, created) => {
-            console.log(topic.get({
-                plain: true
-            }));
-            console.log(created);
-        });
+
+    beforeEach('clear and add', function(done) {
+        exec('sequelize db:seed:undo:all --env test', function(err) {
+            if (err !== null) {
+                console.log('exec error:' + err);
+            }
+        })
+        exec('sequelize db:seed:all --env test', function(err) {
+            if (err !== null) {
+                console.log('exec error:' + err); 
+            }
+        })
+        done();
     });
 
     describe("Default", function() {
