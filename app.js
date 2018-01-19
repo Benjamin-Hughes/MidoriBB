@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const models = require('./models');
 
 const path = require("path");
 const bodyParser = require("body-parser");
@@ -27,6 +28,9 @@ app.use(flash());
 
 app.use(routes);
 
-app.listen(app.get("port"), () => {
-    console.log("Server started on port " + app.get("port"));
+models.sequelize.sync().then(function(){
+    app.listen(app.get("port"), () => {
+        console.log("Server started on port " + app.get("port"));
+    });
 });
+

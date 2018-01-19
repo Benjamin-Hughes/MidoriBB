@@ -3,7 +3,9 @@ const chai = require("chai");
 const expect = chai.expect;
 const chaiHttp = require("chai-http");
 const models = require("../models");
+const defaultController = require("../routes/defaultController");
 let exec = require('child_process').exec;
+
 
 chai.use(chaiHttp);
 
@@ -29,8 +31,8 @@ describe("Default Controller", function() {
             .get("/")
             .end(function(err, res) {
                 expect(res).to.have.status(200);
-                done();
             });
+            done();
         });
     });
 });
